@@ -1,0 +1,9 @@
+<view class="health-circle" style="width: {{size}}rpx; height: {{size}}rpx;">
+  <view class="circle-bg" style="width: {{size}}rpx; height: {{size}}rpx;">
+    <view class="circle-fill" style="background: conic-gradient(#0e8f78 {{score}}%, #e9f0f2 0%); width: {{size}}rpx; height: {{size}}rpx;"></view>
+    <view class="circle-inner" style="width: {{size - 24}}rpx; height: {{size - 24}}rpx;">
+      <text class="score-text">{{score}}</text>
+      <text class="score-label">分</text>
+    </view>
+  </view>
+</view>

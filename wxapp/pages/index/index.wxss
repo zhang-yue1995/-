@@ -1,0 +1,162 @@
+/* 英雄区 */
+.hero-section {
+  background: linear-gradient(145deg, #113448, #0e8f78);
+  padding: 60rpx 40rpx 80rpx;
+  margin: -20rpx -20rpx 30rpx;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.15);
+  color: #a8ffdf;
+  font-size: 22rpx;
+  padding: 6rpx 18rpx;
+  border-radius: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.hero-title {
+  display: block;
+  color: white;
+  font-size: 44rpx;
+  font-weight: bold;
+  margin-bottom: 12rpx;
+}
+
+.hero-subtitle {
+  display: block;
+  color: rgba(255,255,255,0.75);
+  font-size: 26rpx;
+}
+
+/* 上传卡片 */
+.upload-card {
+  display: flex;
+  align-items: center;
+  padding: 32rpx;
+  border: 2rpx dashed #0e8f78;
+  background: #f1fbf8;
+  border-radius: 28rpx;
+  margin-bottom: 24rpx;
+}
+
+.upload-icon {
+  width: 92rpx;
+  height: 92rpx;
+  background: linear-gradient(135deg, #0e8f78, #1dc7a3);
+  border-radius: 22rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 28rpx;
+}
+
+.icon-text {
+  font-size: 40rpx;
+}
+
+.upload-info {
+  flex: 1;
+}
+
+.upload-title {
+  display: block;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #10212b;
+  margin-bottom: 6rpx;
+}
+
+.upload-desc {
+  display: block;
+  font-size: 24rpx;
+  color: #6c7d89;
+}
+
+.btn-sm {
+  padding: 14rpx 28rpx;
+  font-size: 24rpx;
+}
+
+/* 报表列表 */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #10212b;
+}
+
+.section-more {
+  font-size: 26rpx;
+  color: #0e8f78;
+}
+
+.report-card {
+  background: white;
+  border-radius: 20rpx;
+  padding: 28rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 16rpx rgba(27,61,78,.06);
+}
+
+.report-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+
+.enterprise-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #10212b;
+}
+
+.report-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.report-period {
+  font-size: 24rpx;
+  color: #6c7d89;
+}
+
+.health-score {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #0e8f78;
+}
+
+/* 空状态 */
+.empty-state {
+  text-align: center;
+  padding: 100rpx 40rpx;
+}
+
+.empty-icon {
+  font-size: 80rpx;
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.empty-text {
+  display: block;
+  font-size: 30rpx;
+  color: #6c7d89;
+  margin-bottom: 12rpx;
+}
+
+.empty-hint {
+  display: block;
+  font-size: 24rpx;
+  color: #a0aab0;
+}

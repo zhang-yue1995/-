@@ -1,0 +1,24 @@
+.progress-wrapper {
+  width: 100%;
+}
+
+.progress-bar {
+  height: 14rpx;
+  background: #e9f0f2;
+  border-radius: 99rpx;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 99rpx;
+  transition: width 0.3s ease;
+}
+
+.percent-text {
+  display: block;
+  text-align: right;
+  font-size: 24rpx;
+  color: #526a76;
+  margin-top: 8rpx;
+}

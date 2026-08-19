@@ -1,0 +1,177 @@
+.container {
+  padding: 40rpx 30rpx;
+  min-height: 100vh;
+  background: #fff;
+}
+
+/* 图标区域 */
+.icon-section {
+  display: flex;
+  justify-content: center;
+  padding: 80rpx 0 50rpx;
+}
+
+.document-icon {
+  width: 160rpx;
+  height: 160rpx;
+  background: linear-gradient(135deg, #e8f5f1, #d0ebe3);
+  border-radius: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8rpx 24rpx rgba(14, 143, 120, 0.15);
+}
+
+.doc-emoji {
+  font-size: 72rpx;
+}
+
+.rotating {
+  animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* 信息区域 */
+.info-section {
+  text-align: center;
+  margin-bottom: 40rpx;
+}
+
+.main-title {
+  display: block;
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #10212b;
+  margin-bottom: 12rpx;
+}
+
+.sub-title {
+  display: block;
+  font-size: 26rpx;
+  color: #6c7d89;
+}
+
+/* 进度条 */
+.progress-section {
+  margin-bottom: 50rpx;
+  padding: 0 20rpx;
+}
+
+.progress-text {
+  display: block;
+  text-align: center;
+  font-size: 28rpx;
+  color: #0e8f78;
+  font-weight: 600;
+  margin-top: 16rpx;
+}
+
+/* 时间线 */
+.timeline-section {
+  background: #f8fafb;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 40rpx;
+}
+
+.timeline-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 24rpx 0;
+  position: relative;
+  opacity: 0.4;
+}
+
+.timeline-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 15rpx;
+  top: 60rpx;
+  width: 2rpx;
+  height: calc(100% - 40rpx);
+  background: #dce6eb;
+}
+
+.timeline-item.active,
+.timeline-item.completed {
+  opacity: 1;
+}
+
+.timeline-dot {
+  width: 32rpx;
+  height: 32rpx;
+  border-radius: 50%;
+  background: #dce6eb;
+  margin-right: 24rpx;
+  flex-shrink: 0;
+  margin-top: 4rpx;
+}
+
+.timeline-item.active .timeline-dot {
+  background: #0e8f78;
+  box-shadow: 0 0 0 6rpx rgba(14, 143, 120, 0.2);
+}
+
+.timeline-item.completed .timeline-dot {
+  background: #20a96b;
+}
+
+.timeline-content {
+  flex: 1;
+}
+
+.timeline-title {
+  display: block;
+  font-size: 28rpx;
+  color: #10212b;
+  font-weight: 500;
+  margin-bottom: 6rpx;
+}
+
+.timeline-desc {
+  display: block;
+  font-size: 24rpx;
+  color: #6c7d89;
+}
+
+.timeline-status-icon {
+  font-size: 28rpx;
+  color: #20a96b;
+  font-weight: bold;
+  margin-left: 16rpx;
+}
+
+.timeline-status-icon.active {
+  color: #0e8f78;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* 提示框 */
+.tip-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff9e6;
+  border: 1rpx solid #ffe58f;
+  border-radius: 12rpx;
+  padding: 20rpx 28rpx;
+}
+
+.tip-icon {
+  font-size: 28rpx;
+  margin-right: 12rpx;
+}
+
+.tip-text {
+  font-size: 24rpx;
+  color: #ad8a00;
+}

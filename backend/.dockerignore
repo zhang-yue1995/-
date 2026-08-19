@@ -1,0 +1,6 @@
+target
+.idea
+*.db
+*.mv.db
+*.lock.db
+uploads

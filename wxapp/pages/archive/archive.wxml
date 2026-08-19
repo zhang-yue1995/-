@@ -1,0 +1,154 @@
+<view class="container">
+  <!-- 步骤指示器 -->
+  <view class="steps-indicator">
+    <view class="step-item active">
+      <view class="step-num">1</view>
+      <text class="step-text">填写信息</text>
+    </view>
+    <view class="step-line"></view>
+    <view class="step-item">
+      <view class="step-num">2</view>
+      <text class="step-text">复核确认</text>
+    </view>
+    <view class="step-line"></view>
+    <view class="step-item">
+      <view class="step-num">3</view>
+      <text class="step-text">完成</text>
+    </view>
+  </view>
+
+  <!-- 表单标题 -->
+  <view class="form-header">
+    <text class="form-title">新增报表</text>
+    <text class="form-subtitle">请填写报表基本信息</text>
+  </view>
+
+  <!-- 表单内容 -->
+  <view class="form-card">
+    <!-- 企业名称 -->
+    <view class="form-item">
+      <text class="label required">企业名称</text>
+      <input
+        class="input"
+        type="text"
+        placeholder="请输入企业全称"
+        value="{{formData.enterpriseName}}"
+        bindinput="onInputChange"
+        data-field="enterpriseName"
+      />
+    </view>
+
+    <!-- 统一社会信用代码 -->
+    <view class="form-item">
+      <text class="label required">统一社会信用代码</text>
+      <input
+        class="input"
+        type="text"
+        placeholder="请输入18位信用代码"
+        maxlength="18"
+        value="{{formData.creditCode}}"
+        bindinput="onInputChange"
+        data-field="creditCode"
+      />
+      <view class="existing-enterprise-notice" wx:if="{{existingEnterpriseNotice}}">{{existingEnterpriseNotice}}</view>
+    </view>
+
+    <!-- 报表期间 -->
+    <view class="form-item">
+      <text class="label required">报表期间</text>
+      <picker
+        mode="date"
+        fields="month"
+        value="{{formData.period}}"
+        bindchange="onPeriodChange"
+        start="2000-01"
+        end="2099-12"
+      >
+        <view class="picker-value">
+          <text class="{{formData.period ? '' : 'placeholder'}}">{{formData.period || '请选择报表期间'}}</text>
+          <text class="arrow">›</text>
+        </view>
+      </picker>
+    </view>
+
+    <!-- 报表口径 -->
+    <view class="form-item">
+      <text class="label required">报表口径</text>
+      <picker
+        range="{{reportTypes}}"
+        range-key="name"
+        value="{{reportTypeIndex}}"
+        bindchange="onReportTypeChange"
+      >
+        <view class="picker-value">
+          <text>{{reportTypes[reportTypeIndex].name || '请选择报表口径'}}</text>
+          <text class="arrow">›</text>
+        </view>
+      </picker>
+    </view>
+
+    <!-- 单位 -->
+    <view class="form-item">
+      <text class="label required">单位</text>
+      <picker
+        range="{{units}}"
+        value="{{unitIndex}}"
+        bindchange="onUnitChange"
+      >
+        <view class="picker-value">
+          <text>{{units[unitIndex] || '请选择单位'}}</text>
+          <text class="arrow">›</text>
+        </view>
+      </picker>
+    </view>
+
+    <!-- 币种 -->
+    <view class="form-item">
+      <text class="label">币种</text>
+      <picker
+        range="{{currencies}}"
+        value="{{currencyIndex}}"
+        bindchange="onCurrencyChange"
+      >
+        <view class="picker-value">
+          <text>{{currencies[currencyIndex] || '请选择币种'}}</text>
+          <text class="arrow">›</text>
+        </view>
+      </picker>
+    </view>
+
+    <!-- 客户经理 -->
+    <view class="form-item">
+      <text class="label">客户经理</text>
+      <input
+        class="input"
+        type="text"
+        placeholder="请输入客户经理姓名"
+        value="{{formData.managerName}}"
+        bindinput="onInputChange"
+        data-field="managerName"
+      />
+    </view>
+
+    <!-- 备注 -->
+    <view class="form-item textarea-item">
+      <text class="label">备注</text>
+      <textarea
+        class="textarea"
+        placeholder="请输入备注信息（选填）"
+        value="{{formData.remark}}"
+        bindinput="onInputChange"
+        data-field="remark"
+        maxlength="500"
+        auto-height
+      />
+    </view>
+  </view>
+
+  <!-- 提交按钮 -->
+  <view class="submit-section">
+    <button class="btn-primary" bindtap="submitForm" loading="{{submitting}}">
+      保存并加载识别结果
+    </button>
+  </view>
+</view>

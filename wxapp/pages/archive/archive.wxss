@@ -1,0 +1,194 @@
+.container {
+  padding: 30rpx;
+  min-height: 100vh;
+  background: #eef3f7;
+}
+
+/* 步骤指示器 */
+.steps-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30rpx 0 40rpx;
+}
+
+.step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.step-num {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 50%;
+  background: #dce6eb;
+  color: #6c7d89;
+  font-size: 26rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10rpx;
+}
+
+.step-item.active .step-num {
+  background: linear-gradient(135deg, #0e8f78, #1dc7a3);
+  color: white;
+}
+
+.step-text {
+  font-size: 22rpx;
+  color: #6c7d89;
+}
+
+.step-item.active .step-text {
+  color: #0e8f78;
+  font-weight: 600;
+}
+
+.step-line {
+  width: 80rpx;
+  height: 2rpx;
+  background: #dce6eb;
+  margin: 0 20rpx;
+  margin-bottom: 36rpx;
+}
+
+/* 表单头部 */
+.form-header {
+  text-align: center;
+  margin-bottom: 30rpx;
+}
+
+.form-title {
+  display: block;
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #10212b;
+  margin-bottom: 8rpx;
+}
+
+.form-subtitle {
+  display: block;
+  font-size: 26rpx;
+  color: #6c7d89;
+}
+
+/* 表单卡片 */
+.form-card {
+  background: white;
+  border-radius: 20rpx;
+  padding: 28rpx;
+  box-shadow: 0 4rpx 16rpx rgba(27,61,78,.06);
+}
+
+.form-item {
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid #f0f2f5;
+}
+
+.form-item:last-child {
+  border-bottom: none;
+}
+
+.label {
+  display: block;
+  font-size: 28rpx;
+  color: #10212b;
+  font-weight: 500;
+  margin-bottom: 16rpx;
+}
+
+.label.required::before {
+  content: '*';
+  color: #e35d6a;
+  margin-right: 8rpx;
+}
+
+.input {
+  width: 100%;
+  height: 72rpx;
+  border: 1rpx solid #dce6eb;
+  border-radius: 12rpx;
+  padding: 0 20rpx;
+  font-size: 28rpx;
+  color: #10212b;
+  box-sizing: border-box;
+}
+
+.picker-value {
+  height: 72rpx;
+  border: 1rpx solid #dce6eb;
+  border-radius: 12rpx;
+  padding: 0 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 28rpx;
+  color: #10212b;
+}
+
+.picker-value .placeholder {
+  color: #b8c4cc;
+}
+
+.arrow {
+  color: #b8c4cc;
+  font-size: 32rpx;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 160rpx;
+  border: 1rpx solid #dce6eb;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  font-size: 28rpx;
+  color: #10212b;
+  box-sizing: border-box;
+}
+
+.textarea-item {
+  padding-top: 20rpx;
+}
+
+/* 提交按钮 */
+.submit-section {
+  margin-top: 40rpx;
+  padding: 0 10rpx;
+}
+
+.btn-primary {
+  width: 100%;
+  height: 88rpx;
+  background: linear-gradient(135deg, #0e8f78, #1dc7a3);
+  color: white;
+  font-size: 32rpx;
+  font-weight: 600;
+  border: none;
+  border-radius: 44rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 36rpx;
+  box-sizing: border-box;
+  text-align: center;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+.existing-enterprise-notice {
+  margin-top: 12rpx;
+  padding: 16rpx 20rpx;
+  border: 1rpx solid #efc45e;
+  border-radius: 12rpx;
+  background: #fff6dc;
+  color: #a36a00;
+  font-size: 24rpx;
+  font-weight: 600;
+}
+
+.btn-primary::after {
+  border: none;
+}

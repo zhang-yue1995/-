@@ -1,0 +1,27 @@
+.status-tag {
+  display: inline-block;
+  padding: 6rpx 18rpx;
+  border-radius: 8rpx;
+  font-size: 22rpx;
+  font-weight: 500;
+}
+
+.tag-ok {
+  background: #e7f8ef;
+  color: #16744b;
+}
+
+.tag-warn {
+  background: #fff4df;
+  color: #9a6416;
+}
+
+.tag-danger {
+  background: #ffecee;
+  color: #b43d4b;
+}
+
+.tag-info {
+  background: #e8f4fd;
+  color: #1a73e8;
+}

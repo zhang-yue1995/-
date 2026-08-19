@@ -1,0 +1,45 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    restart: unless-stopped
+    environment:
+      TZ: Asia/Shanghai
+      DB_URL: "jdbc:h2:file:/data/xinsulu;MODE=MySQL;AUTO_SERVER=TRUE"
+      DB_USERNAME: sa
+      DB_PASSWORD: ${DB_PASSWORD:-}
+      DDL_AUTO: update
+      UPLOAD_DIR: /data/uploads
+      H2_CONSOLE_ENABLED: "false"
+      SWAGGER_ENABLED: ${SWAGGER_ENABLED:-false}
+      DEMO_DATA_ENABLED: ${DEMO_DATA_ENABLED:-false}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?请在.env中设置ADMIN_PASSWORD}
+      MANAGER_PASSWORD: ${MANAGER_PASSWORD:?请在.env中设置MANAGER_PASSWORD}
+      TOKEN_VALID_HOURS: ${TOKEN_VALID_HOURS:-12}
+      CORS_ALLOWED_ORIGINS: ${PUBLIC_ORIGIN:-http://localhost:8080}
+      AI_PROVIDER: ${AI_PROVIDER:-http}
+      OCR_HTTP_ENDPOINT: ${OCR_HTTP_ENDPOINT:-}
+      OCR_HTTP_TOKEN: ${OCR_HTTP_TOKEN:-}
+      OCR_CONNECT_TIMEOUT_MS: ${OCR_CONNECT_TIMEOUT_MS:-10000}
+      OCR_READ_TIMEOUT_MS: ${OCR_READ_TIMEOUT_MS:-120000}
+    volumes:
+      - xinsulu-data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "timeout 3 bash -c '</dev/tcp/127.0.0.1/8080'"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 40s
+
+  frontend:
+    build:
+      context: ./frontend
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "${WEB_PORT:-8080}:80"
+
+volumes:
+  xinsulu-data:

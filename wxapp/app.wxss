@@ -1,0 +1,171 @@
+page {
+  background-color: #eef3f7;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  color: #10212b;
+  font-size: 28rpx;
+}
+
+/* 品牌色 */
+.brand-primary { color: #0e8f78; }
+.brand-bg { background-color: #0e8f78; }
+
+/* 状态颜色 */
+.text-success { color: #20a96b; }
+.text-warning { color: #f3a83b; }
+.text-danger { color: #e35d6a; }
+.text-info { color: #3d7cf0; }
+.text-muted { color: #6c7d89; }
+
+/* 卡片 */
+.card {
+  background: white;
+  border: 1rpx solid #dce6eb;
+  border-radius: 28rpx;
+  box-shadow: 0 10rpx 36rpx rgba(27,61,78,.06);
+  margin: 20rpx;
+  padding: 28rpx;
+}
+
+/* 按钮 */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 72rpx;
+  box-sizing: border-box;
+  border-radius: 24rpx;
+  padding: 20rpx 26rpx;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1.25;
+  border: 1rpx solid #dce6eb;
+  background: white;
+  font-size: 28rpx;
+}
+
+/*
+ * 微信原生 button 默认使用固定行高，窄屏或文案稍长时会造成文字偏下、
+ * 断行后上下不居中。所有页面按钮统一改用 flex 居中；局部样式仍可覆盖高度。
+ */
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  text-align: center;
+  line-height: 1.25;
+}
+
+button::after {
+  box-sizing: border-box;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #0e8f78, #1dc7a3);
+  color: white;
+  border: none;
+}
+
+.btn-ghost {
+  color: #0e8f78;
+  background: #f1fbf8;
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #e35d6a, #f07c87);
+  color: white;
+  border: none;
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 标签 */
+.tag {
+  font-size: 18rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 10rpx;
+  display: inline-block;
+}
+
+.tag-ok { background: #e7f8ef; color: #16744b; }
+.tag-warn { background: #fff4df; color: #9a6416; }
+.tag-danger { background: #ffecee; color: #b43d4b; }
+
+/* 表格 */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 24rpx;
+}
+
+.table th, .table td {
+  padding: 12rpx 16rpx;
+  border-bottom: 1rpx solid #e8eef1;
+  text-align: left;
+}
+
+.table th {
+  background: #f2f7f9;
+  color: #526a76;
+  font-weight: 600;
+}
+
+.num-right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 通用样式 */
+.container {
+  padding-bottom: 20rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin: 30rpx 20rpx 20rpx;
+  color: #10212b;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mt-20 { margin-top: 20rpx; }
+.mb-20 { margin-bottom: 20rpx; }
+.ml-10 { margin-left: 10rpx; }
+.mr-10 { margin-right: 10rpx; }
+.p-20 { padding: 20rpx; }
+
+/* 安全区域适配 */
+.safe-area-bottom {
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}

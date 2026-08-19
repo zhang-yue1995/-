@@ -1,0 +1,31 @@
+.metric-card {
+  background: white;
+  border-radius: 28rpx;
+  padding: 28rpx;
+  box-shadow: 0 10rpx 36rpx rgba(27,61,78,.06);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.label {
+  font-size: 26rpx;
+  color: #526a76;
+  font-weight: 500;
+}
+
+.progress-section {
+  margin-top: 16rpx;
+}
+
+.max-score {
+  display: block;
+  text-align: right;
+  font-size: 22rpx;
+  color: #a3b4bc;
+  margin-top: 8rpx;
+}

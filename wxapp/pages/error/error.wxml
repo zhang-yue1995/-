@@ -1,0 +1,34 @@
+<view class="container">
+  <!-- 错误图标 -->
+  <view class="error-icon-wrapper">
+    <view class="error-icon">
+      <text class="icon-text">!</text>
+    </view>
+  </view>
+
+  <!-- 标题和说明 -->
+  <view class="content-section">
+    <text class="error-title">识别到不相关内容</text>
+    <text class="error-desc">
+      系统未能识别出财务报表内容，可能的原因：
+    </text>
+    <view class="reason-list">
+      <text class="reason-item">• 上传的文件不是财务报表</text>
+      <text class="reason-item">• 图片模糊或光线不足</text>
+      <text class="reason-item">• 文件格式不支持</text>
+      <text class="reason-item">• 报表被遮挡或截断不完整</text>
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action-section">
+    <button class="btn-primary" bindtap="reupload">重新上传</button>
+    <button class="btn-ghost" bindtap="viewSupportedFormats">查看支持的报表样式</button>
+  </view>
+
+  <!-- 提示信息 -->
+  <view class="tip-box">
+    <text class="tip-title">💡 小提示</text>
+    <text class="tip-content">支持清晰的财务报表图片、PDF及Excel文件；允许只包含部分报表，缺少的表及字段会留空并进入人工复核。</text>
+  </view>
+</view>

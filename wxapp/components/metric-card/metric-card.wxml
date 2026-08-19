@@ -1,0 +1,10 @@
+<view class="metric-card">
+  <view class="header">
+    <text class="label">{{label}}</text>
+    <status-tag type="{{status}}" text="{{value}}{{unit || ''}}" />
+  </view>
+  <view class="progress-section" wx:if="{{maxScore}}">
+    <progress-bar percent="{{(value / maxScore) * 100}}" />
+    <text class="max-score">满分{{maxScore}}</text>
+  </view>
+</view>

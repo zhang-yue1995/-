@@ -1,0 +1,41 @@
+<view class="container">
+  <!-- 文档图标区域 -->
+  <view class="icon-section">
+    <view class="document-icon {{animating ? 'rotating' : ''}}">
+      <text class="doc-emoji">📄</text>
+    </view>
+  </view>
+
+  <!-- 标题信息 -->
+  <view class="info-section">
+    <text class="main-title">正在解析财务报表</text>
+    <text class="sub-title">{{currentStepText}}</text>
+  </view>
+
+  <!-- 进度条 -->
+  <view class="progress-section">
+    <progress-bar percent="{{progress}}" stroke-width="8" active-color="#0e8f78" />
+    <text class="progress-text">{{progress}}%</text>
+  </view>
+
+  <!-- 时间线步骤 -->
+  <view class="timeline-section">
+    <block wx:for="{{steps}}" wx:key="index">
+      <view class="timeline-item {{item.status}}">
+        <view class="timeline-dot"></view>
+        <view class="timeline-content">
+          <text class="timeline-title">{{item.title}}</text>
+          <text class="timeline-desc" wx:if="{{item.desc}}">{{item.desc}}</text>
+        </view>
+        <text class="timeline-status-icon" wx:if="{{item.status === 'completed'}}">✓</text>
+        <text class="timeline-status-icon active" wx:elif="{{item.status === 'active'}}">●</text>
+      </view>
+    </block>
+  </view>
+
+  <!-- 提示框 -->
+  <view class="tip-box">
+    <text class="tip-icon">ℹ️</text>
+    <text class="tip-text">请勿关闭小程序，识别完成后将自动跳转</text>
+  </view>
+</view>

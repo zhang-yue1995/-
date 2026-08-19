@@ -1,0 +1,60 @@
+<!-- 英雄区横幅 -->
+<view class="hero-section">
+  <view class="hero-content">
+    <text class="hero-badge">客户经理工作台</text>
+    <text class="hero-title">拍一下，报表自动录入</text>
+    <text class="hero-subtitle">支持资产负债表、利润表、现金流量表</text>
+  </view>
+</view>
+
+<!-- OCR扫描卡片 -->
+<view class="card upload-card" bindtap="chooseImage">
+  <view class="upload-icon">
+    <text class="icon-text">📷</text>
+  </view>
+  <view class="upload-info">
+    <text class="upload-title">OCR 扫描</text>
+    <text class="upload-desc">拍摄财务报表或从相册选择</text>
+  </view>
+  <button class="btn btn-primary btn-sm">开始扫描</button>
+</view>
+
+<!-- 财务报表文件上传卡片 -->
+<view class="card upload-card" bindtap="chooseDocument">
+  <view class="upload-icon pdf-icon">
+    <text class="icon-text">📄</text>
+  </view>
+  <view class="upload-info">
+    <text class="upload-title">报表文件上传</text>
+    <text class="upload-desc">支持PDF、Excel，单文件≤30MB</text>
+  </view>
+  <button class="btn btn-primary btn-sm">选择文件</button>
+</view>
+
+<!-- 最近报表列表 -->
+<view class="section-header">
+  <text class="section-title">最近报表</text>
+  <text class="section-more" bindtap="goToArchiveList">全部 ›</text>
+</view>
+
+<view class="report-list">
+  <block wx:for="{{recentReports}}" wx:key="id">
+    <view class="report-card" bindtap="viewReport" data-id="{{item.id}}">
+      <view class="report-header">
+        <text class="enterprise-name">{{item.enterpriseName}}</text>
+        <status-tag type="{{item.riskLevelType || 'NORMAL'}}" text="{{item.riskLevelText || '基本健康'}}"/>
+      </view>
+      <view class="report-meta">
+        <text class="report-period">{{item.period}}</text>
+        <text class="health-score">{{item.healthScore}}分</text>
+      </view>
+    </view>
+  </block>
+</view>
+
+<!-- 空状态 -->
+<view class="empty-state" wx:if="{{recentReports.length === 0}}">
+  <text class="empty-icon">📊</text>
+  <text class="empty-text">暂无报表记录</text>
+  <text class="empty-hint">点击上方按钮开始上传</text>
+</view>

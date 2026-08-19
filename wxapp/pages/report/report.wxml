@@ -1,0 +1,76 @@
+<view class="container">
+  <!-- 标题行 -->
+  <view class="header-section">
+    <view class="header-left">
+      <text class="header-title">智能分析报告</text>
+      <text class="generated-badge">已生成</text>
+    </view>
+    <text class="generate-time">{{reportData.generatedAt}}</text>
+  </view>
+
+  <!-- 报告内容卡片 -->
+  <view class="report-card">
+    <!-- 综合结论 -->
+    <view class="section-block">
+      <view class="section-header">
+        <text class="section-icon">📊</text>
+        <text class="section-title">综合评价</text>
+      </view>
+      <text class="section-content">{{reportData.overallConclusion}}</text>
+    </view>
+
+    <!-- 主要风险 -->
+    <view class="section-block" wx:if="{{reportData.mainRisks && reportData.mainRisks.length > 0}}">
+      <view class="section-header warning">
+        <text class="section-icon">⚠️</text>
+        <text class="section-title">主要风险</text>
+      </view>
+      <view class="risk-list">
+        <block wx:for="{{reportData.mainRisks}}" wx:key="title">
+          <view class="risk-item">
+            <view class="risk-level level-{{item.level === '严重' ? 'HIGH' : 'MEDIUM'}}">{{item.level}}</view>
+            <view class="risk-content">
+              <text class="risk-title">{{item.title}}</text>
+              <text class="risk-desc">{{item.desc}}</text>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- 积极因素 -->
+    <view class="section-block positive" wx:if="{{reportData.positiveFactors}}">
+      <view class="section-header success">
+        <text class="section-icon">✅</text>
+        <text class="section-title">积极因素</text>
+      </view>
+      <text class="section-content">{{reportData.positiveFactors}}</text>
+    </view>
+
+    <!-- 建议动作 -->
+    <view class="section-block" wx:if="{{reportData.suggestions && reportData.suggestions.length > 0}}">
+      <view class="section-header info">
+        <text class="section-icon">💡</text>
+        <text class="section-title">改进建议</text>
+      </view>
+      <view class="suggestion-list">
+        <block wx:for="{{reportData.suggestions}}" wx:key="*this">
+          <view class="suggestion-item">
+            <text class="suggestion-num">{{index + 1}}</text>
+            <text class="suggestion-text">{{item}}</text>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- 免责声明 -->
+    <view class="disclaimer" wx:if="{{reportData.disclaimer}}">
+      <text class="disclaimer-text">{{reportData.disclaimer}}</text>
+    </view>
+  </view>
+
+  <!-- 底部按钮组 -->
+  <view class="bottom-actions">
+    <button class="btn-primary" bindtap="exportPdf">导出报告</button>
+  </view>
+</view>

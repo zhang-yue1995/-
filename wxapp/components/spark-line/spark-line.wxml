@@ -1,0 +1,1 @@
+<canvas canvas-id="sparkline-{{id}}" id="sparkline-{{id}}" class="spark-canvas" width="{{width}}" height="{{height}}" style="height: {{height}}px;"></canvas>

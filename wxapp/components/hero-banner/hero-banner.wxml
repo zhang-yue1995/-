@@ -1,0 +1,5 @@
+<view class="hero-banner">
+  <view class="badge">客户经理工作台</view>
+  <view class="title">拍一下，报表自动录入</view>
+  <view class="subtitle">支持资产负债表、利润表、现金流量表</view>
+</view>

@@ -1,0 +1,42 @@
+:root {
+  /* 品牌色 */
+  --brand-primary: #0e8f78;
+  --brand-secondary: #1dc7a3;
+
+  /* 导航栏深色系 */
+  --navy-dark: #123044;
+  --navy-light: #17465c;
+
+  /* 文字颜色 */
+  --text-muted: #6c7d89;
+  --text-dark: #10212b;
+
+  /* 边框与背景 */
+  --border-color: #dce6eb;
+  --bg-light: #eef3f7;
+  --bg-white: #ffffff;
+
+  /* 语义色 */
+  --warning: #f3a83b;
+  --danger: #e35d6a;
+  --success: #20a96b;
+  --info: #3d7cf0;
+
+  /* 圆角规范 */
+  --radius-card: 14px;
+  --radius-btn: 12px;
+  --radius-tag: 999px;
+
+  /* 字号规范 */
+  --font-h1: 28px;
+  --font-h2: 20px;
+  --font-kpi: 26px;
+  --font-body: 14px;
+  --font-small: 12px;
+  --font-table: 13px;
+  --font-tiny: 11px;
+
+  /* 布局尺寸 */
+  --sidebar-width: 210px;
+  --header-height: 66px;
+}

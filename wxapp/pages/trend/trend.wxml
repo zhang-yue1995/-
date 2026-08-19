@@ -1,0 +1,87 @@
+<view class="container">
+  <!-- 标题行 -->
+  <view class="header-section">
+    <text class="header-title">历史趋势</text>
+    <text class="header-subtitle">{{periodsLength}} 个报表期</text>
+  </view>
+
+  <!-- 企业与年度选择器 -->
+  <view class="filter-bar" wx:if="{{enterpriseNames.length > 0}}">
+    <picker class="filter-picker enterprise-picker" range="{{enterpriseNames}}" value="{{enterpriseIndex}}" bindchange="onEnterpriseChange">
+      <view class="filter-btn">
+        <text class="filter-value">{{enterpriseNames[enterpriseIndex]}}</text>
+        <text class="arrow">▼</text>
+      </view>
+    </picker>
+    <picker class="filter-picker year-picker" wx:if="{{years.length > 0}}" range="{{years}}" value="{{currentYearIndex}}" bindchange="onYearChange">
+      <view class="filter-btn">
+        <text>{{years[currentYearIndex] === '全部' ? '全部期间' : years[currentYearIndex] + '年'}}</text>
+        <text class="arrow">▼</text>
+      </view>
+    </picker>
+  </view>
+
+  <!-- 趋势卡片 -->
+  <view class="trend-cards">
+    <block wx:for="{{trendCards}}" wx:key="name">
+      <view class="trend-card">
+        <view class="card-header">
+          <text class="card-title">{{item.name}}</text>
+          <text class="card-value" style="color: {{item.color}}">{{item.value}}</text>
+        </view>
+        <view class="spark-line-wrapper">
+          <spark-line data="{{item.chartData}}" color="{{item.color}}" height="60"/>
+        </view>
+        <view class="period-range" wx:if="{{item.firstPeriod}}">
+          <text>{{item.firstPeriod}}</text>
+          <text>{{item.latestPeriod}}</text>
+        </view>
+        <view class="card-footer">
+          <text class="change-text" style="color: {{item.color}}">{{item.change}}</text>
+          <text class="trend-icon {{item.direction}}">{{item.direction === 'up' ? '↑' : '↓'}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <view class="empty-trend" wx:if="{{!loading && periodsLength === 0}}">
+    <text class="empty-icon">📈</text>
+    <text class="empty-title">当前企业暂无趋势数据</text>
+    <text class="empty-hint">请确认报表已经完成复核入库；上传同一企业的下一期报表后会自动形成对比。</text>
+  </view>
+
+  <!-- 指标网格 -->
+  <view class="section" wx:if="{{summaryCards.length > 0}}">
+    <text class="section-title">关键指标对比</text>
+
+    <view class="metrics-grid">
+      <block wx:for="{{summaryCards}}" wx:key="name">
+        <view class="metric-item">
+          <text class="metric-name">{{item.name}}</text>
+          <text class="metric-value" style="color: {{item.color}}">{{item.value}}</text>
+          <text class="metric-change" style="color: {{item.color}}">{{item.change}}</text>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <!-- 预警提示框 -->
+  <view class="warning-section" wx:if="{{warnings && warnings.length > 0}}">
+    <view class="warning-header">
+      <text class="warning-icon">⚠️</text>
+      <text class="warning-title">风险预警</text>
+    </view>
+
+    <block wx:for="{{warnings}}" wx:key="*this">
+      <view class="warning-item">
+        <view class="warning-time">{{item.time}}</view>
+        <view class="warning-content">
+          <text class="warning-metric">{{item.metric}}</text>
+          <text class="warning-current">{{item.current}}</text>
+          <text class="warning-threshold">(阈值: {{item.threshold}})</text>
+          <text class="warning-trend level-{{item.level}}">{{item.trend}} {{item.level}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

@@ -1,0 +1,6 @@
+<view class="progress-wrapper">
+  <view class="progress-bar">
+    <view class="progress-fill" style="width: {{percent}}%; background: {{color || 'linear-gradient(90deg, #0e8f78, #1dc7a3)'}}"></view>
+  </view>
+  <text class="percent-text" wx:if="{{showText}}">{{percent}}%</text>
+</view>

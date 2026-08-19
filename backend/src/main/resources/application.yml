@@ -1,0 +1,86 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: xinsulu-backend
+
+  servlet:
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 32MB
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+  datasource:
+    url: ${DB_URL:jdbc:h2:file:./xinsulu;MODE=MySQL;AUTO_SERVER=TRUE}
+    username: ${DB_USERNAME:sa}
+    password: ${DB_PASSWORD:}
+
+  h2:
+    console:
+      enabled: ${H2_CONSOLE_ENABLED:false}
+      path: /h2-console
+
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: ${DDL_AUTO:update}
+    properties:
+      hibernate:
+        format_sql: true
+
+  sql:
+    init:
+      mode: never
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+    serialization:
+      write-dates-as-timestamps: false
+    default-property-inclusion: non_null
+
+ai:
+  provider: ${AI_PROVIDER:mock}
+  http:
+    endpoint: ${OCR_HTTP_ENDPOINT:}
+    token: ${OCR_HTTP_TOKEN:}
+    connect-timeout-ms: ${OCR_CONNECT_TIMEOUT_MS:10000}
+    read-timeout-ms: ${OCR_READ_TIMEOUT_MS:120000}
+
+app:
+  demo-data:
+    enabled: ${DEMO_DATA_ENABLED:true}
+  auth:
+    admin-password: ${ADMIN_PASSWORD:admin123}
+    manager-password: ${MANAGER_PASSWORD:manager123}
+    token-valid-hours: ${TOKEN_VALID_HOURS:12}
+  cors:
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:8081,http://127.0.0.1:8081}
+
+xinsulu:
+  storage:
+    upload-dir: ${UPLOAD_DIR:./uploads}
+
+swagger:
+  enabled: ${SWAGGER_ENABLED:false}
+
+# 财务数据校验配置
+financial-validation:
+  balance-sheet-tolerance: 0.01  # 资产负债表平衡误差容忍度（元）
+  income-statement-tolerance: 0.01  # 利润表勾稽误差容忍度
+  cash-flow-tolerance: 0.01  # 现金流量表勾稽误差容忍度
+
+# 健康评分权重配置
+health-score:
+  weights:
+    profitability: 0.25    # 盈利能力
+    solvency: 0.25         # 偿债能力
+    operation: 0.20        # 运营能力
+    growth: 0.15           # 成长能力
+    cash-flow: 0.15        # 现金流能力

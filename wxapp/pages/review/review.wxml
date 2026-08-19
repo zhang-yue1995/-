@@ -1,0 +1,157 @@
+<block wx:if="{{reviewCompleted}}">
+  <view class="completion-page">
+    <view class="steps-indicator completion-steps">
+      <view class="step-item completed">
+        <view class="step-num">✓</view>
+        <text class="step-text">填写信息</text>
+      </view>
+      <view class="step-line active"></view>
+      <view class="step-item completed">
+        <view class="step-num">✓</view>
+        <text class="step-text">复核确认</text>
+      </view>
+      <view class="step-line active"></view>
+      <view class="step-item completed">
+        <view class="step-num">✓</view>
+        <text class="step-text">完成</text>
+      </view>
+    </view>
+
+    <view class="completion-card">
+      <view class="completion-icon">✓</view>
+      <text class="completion-title">字段复核已完成</text>
+      <text class="completion-desc">复核结果已保存。您可以返回继续核对、提交后台终审，或查看完整勾稽校验。</text>
+      <view class="completion-action-grid">
+        <button class="completion-secondary" bindtap="returnToReview">返回复核</button>
+        <button class="completion-primary" loading="{{approvalSubmitting}}" bindtap="submitForApproval">提交审批</button>
+        <button class="completion-secondary" bindtap="finishAndReturnHome">返回首页</button>
+        <button class="completion-primary is-outline" bindtap="viewValidationResult">查看完整校验</button>
+      </view>
+    </view>
+  </view>
+</block>
+
+<block wx:else>
+<view class="container">
+  <!-- 步骤指示器 -->
+  <view class="steps-indicator">
+    <view class="step-item completed">
+      <view class="step-num">✓</view>
+      <text class="step-text">填写信息</text>
+    </view>
+    <view class="step-line active"></view>
+    <view class="step-item active">
+      <view class="step-num">2</view>
+      <text class="step-text">复核确认</text>
+    </view>
+    <view class="step-line"></view>
+    <view class="step-item">
+      <view class="step-num">3</view>
+      <text class="step-text">完成</text>
+    </view>
+  </view>
+
+  <!-- 标题行 -->
+  <view class="header-section">
+    <text class="header-title">识别结果复核</text>
+    <text class="header-subtitle">已识别 {{filteredFields.length}} 个字段</text>
+  </view>
+
+  <!-- Tab切换 -->
+  <view class="tab-bar">
+    <view
+      wx:for="{{tabs}}"
+      wx:key="value"
+      class="tab-item {{currentTab === item.value ? 'active' : ''}}"
+      bindtap="switchTab"
+      data-value="{{item.value}}"
+    >
+      {{item.label}}
+    </view>
+  </view>
+
+  <!-- 警告提示框 -->
+  <view class="warning-box" wx:if="{{lowConfidenceCount > 0}}" bindtap="jumpToNextLowConfidence">
+    <text class="warning-icon">⚠️</text>
+    <text class="warning-text">有 {{lowConfidenceCount}} 个字段置信度低于90%，点击定位待复核字段</text>
+    <text class="warning-arrow">{{lowConfidenceIndex + 1}}/{{lowConfidenceCount}} ›</text>
+  </view>
+
+  <!-- 字段表格 -->
+  <scroll-view scroll-x class="table-scroll" enhanced show-scrollbar="{{false}}">
+    <view class="field-table {{amountHeaders.length === 3 ? 'three-amount-table' : 'two-amount-table'}}">
+      <!-- 表头 -->
+      <view class="table-header">
+        <text class="th th-name">科目名称</text>
+        <text class="th th-value">{{amountHeaders[0]}}</text>
+        <text class="th th-value">{{amountHeaders[1]}}</text>
+        <text class="th th-value" wx:if="{{amountHeaders.length === 3}}">{{amountHeaders[2]}}</text>
+        <text class="th th-status">状态</text>
+      </view>
+
+      <!-- 表格内容 -->
+      <block wx:for="{{filteredFields}}" wx:key="id">
+        <view
+          id="field-{{item.id}}"
+          class="table-row {{item.isAbnormal ? 'abnormal' : ''}} {{focusedFieldId === item.id ? 'focused' : ''}}"
+          bindtap="editField"
+          data-item="{{item}}"
+        >
+          <text class="td td-name">{{item.originalName}}</text>
+          <text class="td td-value {{item.standardizedValue < 0 ? 'negative' : ''}}">{{item.standardizedValue === '' ? '—' : item.standardizedValue}}</text>
+          <text class="td td-value {{item.standardizedSecondaryValue < 0 ? 'negative' : ''}}">{{item.standardizedSecondaryValue === '' ? '—' : item.standardizedSecondaryValue}}</text>
+          <text class="td td-value {{item.standardizedTertiaryValue < 0 ? 'negative' : ''}}" wx:if="{{amountHeaders.length === 3}}">{{item.standardizedTertiaryValue === '' ? '—' : item.standardizedTertiaryValue}}</text>
+          <view class="td td-status">
+            <view class="confidence-tag confidence-{{item.confidenceLevel}}">
+              {{item.confidence}}%
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </scroll-view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{filteredFields.length === 0}}">
+    <text class="empty-text">暂无数据</text>
+  </view>
+
+  <!-- 底部按钮组 -->
+  <view class="bottom-actions">
+    <button class="btn-secondary" bindtap="viewOriginalImage">查看原图</button>
+    <button class="btn-primary" bindtap="submitReview" loading="{{submitting}}">确认入库</button>
+  </view>
+</view>
+</block>
+
+<!-- 编辑弹窗 -->
+<view class="modal-mask" wx:if="{{showEditModal}}" bindtap="closeEditModal"></view>
+<view class="edit-modal" wx:if="{{showEditModal}}">
+  <view class="modal-header">
+    <text class="modal-title">编辑字段</text>
+    <text class="modal-close" bindtap="closeEditModal">✕</text>
+  </view>
+  <view class="modal-body">
+    <text class="field-label">科目：{{editingField.originalName}}</text>
+    <text class="field-original">请按原表金额列分别核对</text>
+    <text class="field-label amount-label">{{amountHeaders[0]}}</text>
+    <input
+      class="field-input"
+      type="digit"
+      value="{{editingValues.primary}}"
+      placeholder="请输入修正后的值"
+      data-key="primary"
+      bindinput="onEditInput"
+    />
+    <text class="field-label amount-label">{{amountHeaders[1]}}</text>
+    <input class="field-input" type="digit" value="{{editingValues.secondary}}" placeholder="请输入修正后的值" data-key="secondary" bindinput="onEditInput" />
+    <block wx:if="{{amountHeaders.length === 3}}">
+      <text class="field-label amount-label">{{amountHeaders[2]}}</text>
+      <input class="field-input" type="digit" value="{{editingValues.tertiary}}" placeholder="请输入修正后的值" data-key="tertiary" bindinput="onEditInput" />
+    </block>
+  </view>
+  <view class="modal-footer">
+    <button class="btn-cancel" bindtap="closeEditModal">取消</button>
+    <button class="btn-confirm" bindtap="confirmEdit">确定</button>
+  </view>
+</view>

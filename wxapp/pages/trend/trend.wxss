@@ -1,0 +1,262 @@
+.container {
+  padding: 30rpx;
+  min-height: 100vh;
+  background: #eef3f7;
+}
+
+/* 标题行 */
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.header-title {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #10212b;
+}
+
+.header-subtitle {
+  font-size: 26rpx;
+  color: #6c7d89;
+}
+
+/* 筛选栏 */
+.filter-bar {
+  display: flex;
+  gap: 16rpx;
+  margin-bottom: 24rpx;
+}
+
+.filter-picker { min-width: 0; }
+.enterprise-picker { flex: 1; }
+.year-picker { flex: none; }
+
+.filter-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8rpx;
+  background: white;
+  padding: 16rpx 28rpx;
+  border-radius: 20rpx;
+  font-size: 28rpx;
+  color: #10212b;
+  box-shadow: 0 2rpx 8rpx rgba(27,61,78,.06);
+}
+
+.filter-value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.arrow {
+  font-size: 20rpx;
+  color: #6c7d89;
+}
+
+/* 趋势卡片 */
+.trend-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20rpx;
+  margin-bottom: 30rpx;
+}
+
+.period-range {
+  display: flex;
+  justify-content: space-between;
+  margin-top: -4rpx;
+  color: #91a1aa;
+  font-size: 21rpx;
+}
+
+.trend-card {
+  background: white;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(27,61,78,.06);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.card-title {
+  font-size: 26rpx;
+  color: #6c7d89;
+}
+
+.card-value {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.spark-line-wrapper {
+  margin: 16rpx 0;
+  height: 120rpx;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12rpx;
+}
+
+.change-text {
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+.trend-icon {
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+/* 区块 */
+.section {
+  background: white;
+  border-radius: 20rpx;
+  padding: 28rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(27,61,78,.06);
+}
+
+.section-title {
+  display: block;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #10212b;
+  margin-bottom: 24rpx;
+}
+
+/* 指标网格 */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20rpx;
+}
+
+.metric-item {
+  background: #f8fafb;
+  border-radius: 12rpx;
+  padding: 20rpx;
+}
+
+.metric-name {
+  display: block;
+  font-size: 24rpx;
+  color: #6c7d89;
+  margin-bottom: 8rpx;
+}
+
+.metric-value {
+  display: block;
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 6rpx;
+}
+
+.metric-change {
+  display: block;
+  font-size: 22rpx;
+}
+
+.empty-trend {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 72rpx 42rpx;
+  color: #6c7d89;
+  text-align: center;
+}
+
+.empty-icon { margin-bottom: 18rpx; font-size: 56rpx; }
+.empty-title { margin-bottom: 10rpx; color: #3d5563; font-size: 29rpx; font-weight: 600; }
+.empty-hint { font-size: 24rpx; line-height: 1.65; }
+
+/* 预警区域 */
+.warning-section {
+  background: white;
+  border-radius: 20rpx;
+  padding: 28rpx;
+  box-shadow: 0 4rpx 16rpx rgba(27,61,78,.06);
+  border: 1rpx solid #ffd0d0;
+}
+
+.warning-header {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  margin-bottom: 20rpx;
+}
+
+.warning-icon {
+  font-size: 32rpx;
+}
+
+.warning-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #e35d6a;
+}
+
+.warning-item {
+  display: flex;
+  gap: 16rpx;
+  padding: 18rpx 0;
+  border-bottom: 1rpx solid #fff5f5;
+}
+
+.warning-item:last-child {
+  border-bottom: none;
+}
+
+.warning-time {
+  width: 140rpx;
+  font-size: 24rpx;
+  color: #6c7d89;
+  flex-shrink: 0;
+}
+
+.warning-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  flex-wrap: wrap;
+}
+
+.warning-metric {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #10212b;
+}
+
+.warning-current {
+  font-size: 26rpx;
+  font-weight: 500;
+  color: #e35d6a;
+}
+
+.warning-threshold {
+  font-size: 22rpx;
+  color: #95a5a6;
+}
+
+.warning-trend {
+  font-size: 22rpx;
+  font-weight: 600;
+  padding: 2rpx 10rpx;
+  border-radius: 8rpx;
+}
+
+.level-HIGH { background: #fff0f0; color: #e35d6a; }
+.level-MEDIUM { background: #fff9e6; color: #f3a83b; }

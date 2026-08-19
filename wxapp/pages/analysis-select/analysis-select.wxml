@@ -1,0 +1,48 @@
+<view class="page">
+  <view class="intro-card">
+    <text class="eyebrow">SMART ANALYSIS</text>
+    <text class="title">选择一份已上传报表</text>
+    <text class="subtitle">系统将基于归档数据生成可预览、可审批、可直接下载的 PDF 智能分析报告。</text>
+  </view>
+
+  <view class="search-bar">
+    <text class="search-icon">⌕</text>
+    <input placeholder="搜索企业名称或报表期间" value="{{keyword}}" bindinput="onKeywordInput" />
+  </view>
+
+  <view class="section-heading">
+    <text>全部已上传报表</text>
+    <text class="count">{{filteredReports.length}} 份</text>
+  </view>
+
+  <view class="report-list">
+    <view wx:for="{{filteredReports}}" wx:key="archiveId"
+      class="report-card {{selectedId == item.archiveId ? 'selected' : ''}}"
+      data-id="{{item.archiveId}}" bindtap="selectReport">
+      <view class="select-dot"><view class="dot-inner" wx:if="{{selectedId == item.archiveId}}"></view></view>
+      <view class="report-main">
+        <text class="company">{{item.enterpriseName}}</text>
+        <view class="meta-row">
+          <text>{{item.reportPeriod}}</text>
+          <text>上传 {{item.createdDate || '—'}}</text>
+        </view>
+        <view class="tags">
+          <text class="tag risk">{{item.riskText}}</text>
+          <text class="tag score">健康分 {{item.scoreText}}</text>
+          <text class="tag approval">{{item.approvalText}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:if="{{!loading && filteredReports.length === 0}}">
+    <text class="empty-icon">▤</text>
+    <text>暂无可生成分析报告的归档数据</text>
+  </view>
+
+  <view class="bottom-action">
+    <button class="generate-button" loading="{{generating}}" disabled="{{!selectedId || generating}}" bindtap="generatePreview">
+      生成并预览智能分析报告
+    </button>
+  </view>
+</view>

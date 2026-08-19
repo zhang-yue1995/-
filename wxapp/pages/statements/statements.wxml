@@ -1,0 +1,87 @@
+<view class="container">
+  <!-- 顶部信息栏 -->
+  <view class="info-bar">
+    <view class="info-left">
+      <text class="enterprise-name">{{reportInfo.enterpriseName}}</text>
+      <picker
+        class="period-picker"
+        mode="selector"
+        range="{{periodOptions}}"
+        range-key="label"
+        value="{{periodIndex}}"
+        disabled="{{!periodSwitchable}}"
+        bindchange="onPeriodChange"
+      >
+        <view class="period-switcher {{periodSwitchable ? 'switchable' : ''}}">
+          <text class="period-label">报表期</text>
+          <text class="period">{{reportInfo.period || '-'}}</text>
+          <text class="period-action" wx:if="{{periodSwitchable}}">切换 · 共{{periodOptions.length}}期⌄</text>
+          <text class="period-single" wx:else>仅1期</text>
+        </view>
+      </picker>
+    </view>
+    <view class="info-right">
+      <status-tag type="{{riskLevelType}}" text="{{riskLevelText}}"/>
+    </view>
+  </view>
+
+  <!-- 单位信息 -->
+  <view class="unit-bar">
+    <text>单位：{{reportInfo.unit || '万元'}}</text>
+    <text class="loading-text" wx:if="{{loading}}">正在切换报表期...</text>
+  </view>
+
+  <!-- Tab切换 -->
+  <view class="tab-bar">
+    <view
+      wx:for="{{tabs}}"
+      wx:key="value"
+      class="tab-item {{currentTab === item.value ? 'active' : ''}}"
+      bindtap="switchTab"
+      data-value="{{item.value}}"
+    >
+      {{item.label}}
+    </view>
+  </view>
+
+  <!-- 报表表格 -->
+  <scroll-view scroll-x class="table-container" enhanced show-scrollbar="{{false}}">
+    <view class="statement-table">
+      <!-- 表头 -->
+      <view class="table-header">
+        <text class="th th-item">项目</text>
+        <block wx:if="{{currentTab === 'BALANCE_SHEET'}}">
+          <text class="th">期末余额</text>
+          <text class="th">年初余额</text>
+        </block>
+        <block wx:elif="{{currentTab === 'INCOME_STATEMENT'}}">
+          <text class="th">本期金额</text>
+          <text class="th">上期金额</text>
+          <text class="th">本月金额</text>
+        </block>
+        <block wx:else>
+          <text class="th">本期金额</text>
+          <text class="th">上期金额</text>
+          <text class="th">本月金额</text>
+        </block>
+      </view>
+
+      <!-- 表格数据 -->
+      <block wx:for="{{currentData}}" wx:key="name">
+        <view class="table-row {{item.isTotal ? 'total-row' : ''}} {{item.level > 0 ? 'indent-' + item.level : ''}}">
+          <text class="td td-item">{{item.name}}</text>
+          <text class="td td-num {{item.value1 < 0 ? 'negative' : ''}}">{{item.formattedValue1}}</text>
+          <text class="td td-num {{item.value2 < 0 ? 'negative' : ''}}">{{item.formattedValue2}}</text>
+          <text class="td td-num {{item.value3 < 0 ? 'negative' : ''}}" wx:if="{{currentTab !== 'BALANCE_SHEET'}}">{{item.formattedValue3}}</text>
+        </view>
+      </block>
+    </view>
+  </scroll-view>
+
+  <!-- 底部操作按钮 -->
+  <view class="bottom-actions">
+    <button class="btn-secondary" bindtap="editFields">编辑字段</button>
+    <button class="btn-primary" bindtap="goToValidation">数据校验</button>
+    <button wx:if="{{canSubmitApproval}}" class="btn-approval" bindtap="submitForApproval" loading="{{approvalSubmitting}}">提交审批</button>
+  </view>
+</view>

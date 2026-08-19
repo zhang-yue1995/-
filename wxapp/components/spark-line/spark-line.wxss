@@ -1,0 +1,4 @@
+.spark-canvas {
+  display: block;
+  width: 100%;
+}

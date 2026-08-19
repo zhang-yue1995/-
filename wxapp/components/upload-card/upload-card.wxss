@@ -1,0 +1,48 @@
+.upload-card {
+  background: white;
+  border-radius: 28rpx;
+  margin: 20rpx;
+  padding: 36rpx;
+  border: 3rpx dashed #dce6eb;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s;
+}
+
+.upload-card:active {
+  background: #f7fbfa;
+  border-color: #0e8f78;
+}
+
+.icon-wrapper {
+  width: 100rpx;
+  height: 100rpx;
+  background: linear-gradient(135deg, #e7f8ef, #d4f5ea);
+  border-radius: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 28rpx;
+  flex-shrink: 0;
+}
+
+.icon {
+  font-size: 48rpx;
+  color: #0e8f78;
+}
+
+.content {
+  flex: 1;
+}
+
+.title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #10212b;
+  margin-bottom: 10rpx;
+}
+
+.desc {
+  font-size: 24rpx;
+  color: #526a76;
+}

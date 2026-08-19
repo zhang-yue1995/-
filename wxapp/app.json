@@ -1,0 +1,59 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/progress/progress",
+    "pages/archive/archive",
+    "pages/review/review",
+    "pages/statements/statements",
+    "pages/validation/validation",
+    "pages/health/health",
+    "pages/report/report",
+    "pages/analysis-select/analysis-select",
+    "pages/trend/trend",
+    "pages/archive-list/archive-list",
+    "pages/upload-history/upload-history",
+    "pages/error/error",
+    "pages/profile/profile"
+  ],
+  "tabBar": {
+    "color": "#7c8d97",
+    "selectedColor": "#0e8f78",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "assets/images/tab-home.png",
+        "selectedIconPath": "assets/images/tab-home-active.png"
+      },
+      {
+        "pagePath": "pages/archive-list/archive-list",
+        "text": "报表",
+        "iconPath": "assets/images/tab-archive.png",
+        "selectedIconPath": "assets/images/tab-archive-active.png"
+      },
+      {
+        "pagePath": "pages/trend/trend",
+        "text": "趋势",
+        "iconPath": "assets/images/tab-trend.png",
+        "selectedIconPath": "assets/images/tab-trend-active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "assets/images/tab-profile.png",
+        "selectedIconPath": "assets/images/tab-profile-active.png"
+      }
+    ]
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#123044",
+    "navigationBarTitleText": "鑫速录",
+    "navigationBarTextStyle": "white"
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents"
+}

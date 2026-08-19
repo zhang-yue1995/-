@@ -1,0 +1,16 @@
+<view class="table-container">
+  <view class="table-header">
+    <text class="th th-name">科目</text>
+    <text class="th th-value">值</text>
+    <text class="th th-status">状态</text>
+  </view>
+  <scroll-view scroll-y class="table-body">
+    <view class="table-row {{item.confidence < 70 ? 'low-confidence' : ''}}" wx:for="{{fields}}" wx:key="name">
+      <text class="td td-name">{{item.name}}</text>
+      <text class="td td-value">{{item.value}}</text>
+      <view class="td td-status">
+        <status-tag type="{{item.confidence >= 90 ? 'ok' : item.confidence >= 70 ? 'warn' : 'danger'}}" text="{{item.confidence}}%" />
+      </view>
+    </view>
+  </scroll-view>
+</view>

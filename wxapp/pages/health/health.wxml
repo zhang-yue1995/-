@@ -1,0 +1,67 @@
+<view class="container">
+  <!-- 标题行 -->
+  <view class="header-section">
+    <view class="header-left">
+      <text class="header-title">财务健康度</text>
+      <text class="header-subtitle">基于 {{dimensions.length}} 维度 {{totalIndicators}} 项指标</text>
+    </view>
+    <status-tag type="{{riskLevelType}}" text="{{riskLevelText}}"/>
+  </view>
+
+  <!-- 圆环评分图 -->
+  <view class="score-section">
+    <view class="score-circle-wrapper">
+      <health-circle score="{{healthData.totalScore}}" size="200" />
+    </view>
+    <view class="score-detail">
+      <text class="score-label">综合评分</text>
+      <text class="score-number">{{healthData.totalScore}}</text>
+      <text class="score-max">/100</text>
+    </view>
+  </view>
+
+  <!-- 四宫格指标卡 -->
+  <view class="dimension-grid">
+    <block wx:for="{{dimensions}}" wx:key="name">
+      <view class="dimension-card">
+        <view class="dimension-header">
+          <text class="dimension-name">{{item.name}}</text>
+          <text class="dimension-score">{{item.score}}/{{item.maxScore}}</text>
+        </view>
+        <progress-bar
+          percent="{{item.percent}}"
+          stroke-width="6"
+          active-color="{{item.percent >= 70 ? '#20a96b' : item.percent >= 40 ? '#f3a83b' : '#e35d6a'}}"
+        />
+        <text class="dimension-status status-{{item.statusClass}}">{{item.statusText}}</text>
+      </view>
+    </block>
+  </view>
+
+  <!-- 关键指标卡片 -->
+  <view class="section">
+    <text class="section-title">关键风险指标</text>
+
+    <block wx:for="{{keyMetrics}}" wx:key="name">
+      <view class="metric-card">
+        <view class="metric-info">
+          <text class="metric-name">{{item.name}}</text>
+          <text class="metric-value" style="color: {{item.color}}">{{item.value}}</text>
+        </view>
+        <view class="metric-progress">
+          <progress-bar
+            percent="{{item.percent}}"
+            stroke-height="8"
+            active-color="{{item.color}}"
+          />
+        </view>
+        <text class="metric-status" style="color: {{item.color}}">{{item.status}}</text>
+      </view>
+    </block>
+  </view>
+
+  <!-- 底部按钮 -->
+  <view class="bottom-action">
+    <button class="btn-primary" bindtap="viewReport">查看AI分析报告</button>
+  </view>
+</view>

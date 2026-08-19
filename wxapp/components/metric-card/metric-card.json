@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "status-tag": "../status-tag/status-tag",
+    "progress-bar": "../progress-bar/progress-bar"
+  }
+}

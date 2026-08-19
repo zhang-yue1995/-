@@ -1,0 +1,41 @@
+.health-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle-bg {
+  position: relative;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle-fill {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.circle-inner {
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.score-text {
+  font-size: 56rpx;
+  font-weight: bold;
+  color: #0e8f78;
+  line-height: 1;
+}
+
+.score-label {
+  font-size: 22rpx;
+  color: #526a76;
+  margin-top: 4rpx;
+}

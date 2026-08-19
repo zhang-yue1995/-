@@ -1,0 +1,131 @@
+<view class="container">
+  <!-- 标题行 -->
+  <view class="header-section">
+    <text class="header-title">报表档案</text>
+    <button class="btn-add" bindtap="goToAdd">+ 新增</button>
+  </view>
+
+  <!-- 搜索框 -->
+  <view class="search-bar">
+    <text class="search-icon">🔍</text>
+    <input
+      class="search-input"
+      type="text"
+      placeholder="搜索企业名称或信用代码"
+      value="{{searchKeyword}}"
+      bindinput="onSearchInput"
+      confirm-type="search"
+      bindconfirm="doSearch"
+    />
+  </view>
+
+  <!-- 统计卡片 -->
+  <view class="stats-row">
+    <view class="stat-card">
+      <text class="stat-number">{{stats.newReports}}</text>
+      <text class="stat-label">本月新增</text>
+    </view>
+    <view class="stat-card">
+      <text class="stat-number warning">{{stats.pendingReview}}</text>
+      <text class="stat-label">待复核</text>
+    </view>
+  </view>
+
+  <!-- 企业列表 -->
+  <scroll-view
+    scroll-y
+    class="enterprise-list"
+    refresher-enabled="{{true}}"
+    refresher-triggered="{{refreshing}}"
+    bindrefresherrefresh="onRefresh"
+  >
+    <block wx:for="{{filteredEnterprises}}" wx:key="id">
+      <view class="enterprise-card" bindtap="viewEnterprise" data-id="{{item.id}}">
+        <view class="card-header">
+          <text class="enterprise-name">{{item.name}}</text>
+          <status-tag type="{{item.riskLevel}}" text="{{item.riskLevelText}}"/>
+        </view>
+        <view class="card-info">
+          <text class="credit-code">{{item.creditCode}}</text>
+        </view>
+        <view class="card-meta">
+          <view class="period-summary">
+            <text class="meta-item">最新报表：{{item.latestReport || '-'}}</text>
+            <text class="period-count">共 {{item.reportCount}} 期</text>
+          </view>
+          <text class="meta-item health" wx:if="{{item.hasHealthScore}}">健康分：{{item.healthScore}}</text>
+          <text class="meta-item unscored" wx:else>待评分</text>
+        </view>
+        <view class="period-list" wx:if="{{item.periodReports.length}}">
+          <text class="period-list-label">报表期</text>
+          <scroll-view scroll-x class="period-scroll" show-scrollbar="{{false}}">
+            <view class="period-chips">
+              <view
+                wx:for="{{item.periodReports}}"
+                wx:for-item="periodItem"
+                wx:key="reportId"
+                class="period-chip {{periodItem.period === item.latestReport ? 'latest' : ''}}"
+                catchtap="viewReportPeriod"
+                data-report-id="{{periodItem.reportId}}"
+                data-enterprise-id="{{item.id}}"
+              >
+                {{periodItem.period}}{{periodItem.period === item.latestReport ? ' · 最新' : ''}}
+              </view>
+            </view>
+          </scroll-view>
+        </view>
+        <view class="card-footer">
+          <text class="manager">客户经理：{{item.managerName || '-'}}</text>
+          <view class="view-periods">
+            <text>查看并切换报表期</text>
+            <text class="arrow">›</text>
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{filteredEnterprises.length === 0 && !loading}}">
+      <text class="empty-icon">📋</text>
+      <text class="empty-text">暂无报表记录</text>
+      <text class="empty-hint">点击右上角新增按钮开始</text>
+    </view>
+  </scroll-view>
+</view>
+
+<view class="modal-mask" wx:if="{{showAddModal}}" bindtap="closeAddModal">
+  <view class="add-modal" catchtap="preventModalClose">
+    <view class="modal-head">
+      <view>
+        <text class="modal-title">{{addStep === 'info' ? '新增报表' : '上传报表原件'}}</text>
+        <text class="modal-step">{{addStep === 'info' ? '1/2 企业与报表信息' : '2/2 OCR扫描或文件上传'}}</text>
+      </view>
+      <text class="modal-close" bindtap="closeAddModal">×</text>
+    </view>
+
+    <block wx:if="{{addStep === 'info'}}">
+      <view class="modal-form">
+        <view class="modal-field"><text>企业名称 *</text><input value="{{addDraft.enterpriseName}}" data-field="enterpriseName" bindinput="onAddInput" placeholder="请输入企业全称" /></view>
+        <view class="modal-field"><text>统一社会信用代码 *</text><input value="{{addDraft.creditCode}}" data-field="creditCode" bindinput="onAddInput" maxlength="18" placeholder="请输入18位代码" /></view>
+        <view class="duplicate-notice" wx:if="{{duplicateNotice}}">{{duplicateNotice}}</view>
+        <view class="modal-field"><text>报表期间 *</text><picker mode="date" fields="month" value="{{addDraft.period}}" bindchange="onAddPeriodChange"><view class="modal-picker">{{addDraft.period || '请选择报表期间'}} <text>›</text></view></picker></view>
+        <view class="modal-field"><text>客户经理</text><input value="{{addDraft.managerName}}" data-field="managerName" bindinput="onAddInput" placeholder="请输入客户经理姓名" /></view>
+      </view>
+      <view class="modal-actions"><button class="modal-secondary" bindtap="closeAddModal">取消</button><button class="modal-primary" bindtap="showUploadStep">下一步</button></view>
+    </block>
+
+    <block wx:else>
+      <view class="draft-summary">
+        <text>{{addDraft.enterpriseName}}</text>
+        <text>{{addDraft.period}} · 企业资料尚未入库</text>
+      </view>
+      <view class="source-grid">
+        <button class="source-card" bindtap="chooseAddAlbum"><text class="source-icon">🖼️</text><text class="source-title">相册多选</text><text class="source-desc">一次选择多张报表照片</text></button>
+        <button class="source-card" bindtap="startAddCamera"><text class="source-icon">📷</text><text class="source-title">连续扫描</text><text class="source-desc">逐张拍摄，完成后统一识别</text></button>
+        <button class="source-card source-wide" bindtap="chooseAddDocument"><text class="source-icon">📄</text><text class="source-title">PDF / Excel</text><text class="source-desc">支持单文件，最大30MB</text></button>
+      </view>
+      <text class="temporary-tip">关闭窗口不会保存企业资料；识别并完成建档后才正式入库。</text>
+      <view class="modal-actions"><button class="modal-secondary" bindtap="backToAddInfo">上一步</button><button class="modal-secondary" bindtap="closeAddModal">取消</button></view>
+    </block>
+  </view>
+</view>

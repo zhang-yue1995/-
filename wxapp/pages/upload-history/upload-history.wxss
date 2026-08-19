@@ -1,0 +1,48 @@
+.page {
+  min-height: 100vh;
+  padding: 28rpx 26rpx 60rpx;
+  box-sizing: border-box;
+  background: #eef3f7;
+}
+
+.page-header { margin-bottom: 24rpx; }
+.title, .subtitle { display: block; }
+.title { color: #10212b; font-size: 38rpx; font-weight: 700; }
+.subtitle { margin-top: 8rpx; color: #7c8d97; font-size: 24rpx; }
+
+.filter-card { padding: 24rpx; margin-bottom: 24rpx; background: #fff; border-radius: 20rpx; }
+.company-search { display: flex; gap: 16rpx; }
+.company-search input {
+  flex: 1; height: 72rpx; padding: 0 20rpx; box-sizing: border-box;
+  background: #f6f9fa; border: 1rpx solid #dce6eb; border-radius: 12rpx; font-size: 26rpx;
+}
+.company-search button {
+  width: 130rpx; height: 72rpx; padding: 0; color: #fff; background: #0e8f78;
+  border-radius: 36rpx; font-size: 26rpx; line-height: 1.25;
+}
+.company-search button::after, .delete-button::after { border: 0; }
+.date-row { display: flex; align-items: center; margin-top: 18rpx; }
+.date-picker { min-width: 250rpx; padding: 16rpx 20rpx; color: #526873; background: #f6f9fa; border-radius: 10rpx; font-size: 25rpx; }
+.clear-date { margin-left: 22rpx; color: #0e8f78; font-size: 24rpx; }
+
+.record-card {
+  display: flex; align-items: center; gap: 20rpx; padding: 26rpx 22rpx; margin-bottom: 18rpx;
+  background: #fff; border-radius: 20rpx; box-shadow: 0 5rpx 18rpx rgba(27, 61, 78, .05);
+}
+.record-main { flex: 1; min-width: 0; }
+.record-title-row { display: flex; align-items: center; justify-content: space-between; gap: 16rpx; }
+.enterprise-name { overflow: hidden; color: #10212b; font-size: 29rpx; font-weight: 650; text-overflow: ellipsis; white-space: nowrap; }
+.status { flex: none; padding: 6rpx 14rpx; border-radius: 18rpx; font-size: 21rpx; }
+.status.pending { color: #b67814; background: #fff4d9; }
+.status.done { color: #178b61; background: #e8f8ee; }
+.file-name { display: block; overflow: hidden; margin-top: 12rpx; color: #667b86; font-size: 24rpx; text-overflow: ellipsis; white-space: nowrap; }
+.record-meta { display: flex; flex-wrap: wrap; gap: 8rpx 22rpx; margin-top: 14rpx; color: #82919a; font-size: 22rpx; }
+.delete-button {
+  flex: none; width: 104rpx; height: 62rpx; padding: 0; color: #e35d6a;
+  background: #fff1f2; border-radius: 31rpx; font-size: 24rpx; line-height: 1.25;
+}
+.empty-state { padding: 150rpx 20rpx; text-align: center; }
+.empty-icon, .empty-title, .empty-hint { display: block; }
+.empty-icon { font-size: 70rpx; }
+.empty-title { margin-top: 20rpx; color: #617580; font-size: 28rpx; }
+.empty-hint { margin-top: 12rpx; color: #9aa7ae; font-size: 23rpx; }
